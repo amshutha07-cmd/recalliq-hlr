@@ -1,0 +1,14 @@
+{
+  "total_rows": 12854226,
+  "unique_users": 115222,
+  "unique_lexemes": 18781,
+  "date_range": "2013-02-28 \u2192 2013-03-12",
+  "mean_p_recall": 0.896106,
+  "std_p_recall": 0.271405,
+  "min_p_recall": 0.0,
+  "max_p_recall": 1.0,
+  "mean_delta_days": 8.44,
+  "max_delta_days": 466.76,
+  "null_p_recall": 0,
+  "query_time_sec": 2.18
+}
