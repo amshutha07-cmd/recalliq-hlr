@@ -49,6 +49,21 @@ DuckDB · Python / pandas · NumPy · scikit-learn (`roc_auc_score`) · SQL (via
 | Val   | 1,294,912  | 11,775 |
 | Test  | 1,286,317  | 11,554 |
 
+### Reproducing the data locally
+
+Raw and processed data files (`data/*.csv`, `data/*.parquet`, `data/*.duckdb`) are
+**not** committed to this repo — they're large (the raw CSV alone is 1.3GB) and
+regenerable, so keeping them out of git is standard practice. To reproduce:
+
+1. Download `settles.acl16.learning_traces.13m.csv` from the [official Duolingo
+   half-life regression dataset release](https://github.com/duolingo/halflife-regression)
+   and place it in `data/`.
+2. Run `python scripts/01_data_loading.py` — builds `data/duolingo.duckdb` and the
+   EDA outputs in `results/`.
+3. Run `python scripts/02_feature_engineering.py` — builds
+   `data/features_{train,val,test}.parquet`.
+4. Run `scripts/03_baseline_leitner.py` and `scripts/04_model_hlr.py` in order.
+
 ## Results
 
 | Split | Model    | MAE    | RMSE   | AUC    | Rows       |
