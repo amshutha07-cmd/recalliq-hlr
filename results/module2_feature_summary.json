@@ -1,0 +1,17 @@
+{
+  "split_counts": {
+    "test": {
+      "row_count": 1286317,
+      "user_count": 11554
+    },
+    "train": {
+      "row_count": 10272997,
+      "user_count": 91893
+    },
+    "val": {
+      "row_count": 1294912,
+      "user_count": 11775
+    }
+  },
+  "corr_h_estimate_p_recall": 0.1123
+}
