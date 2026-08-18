@@ -1,0 +1,70 @@
+[
+  {
+    "split": "val",
+    "mae": 0.1795,
+    "rmse": 0.2782,
+    "auc": 0.5639,
+    "row_count": 1294912,
+    "by_bucket": [
+      {
+        "leitner_bucket": 0,
+        "row_count": 10847.0,
+        "mae": 0.43983509115574787
+      },
+      {
+        "leitner_bucket": 1,
+        "row_count": 115768.0,
+        "mae": 0.3470992929485286
+      },
+      {
+        "leitner_bucket": 2,
+        "row_count": 213854.0,
+        "mae": 0.2594658918008437
+      },
+      {
+        "leitner_bucket": 3,
+        "row_count": 273361.0,
+        "mae": 0.1800387804074966
+      },
+      {
+        "leitner_bucket": 4,
+        "row_count": 681082.0,
+        "mae": 0.12151001772821685
+      }
+    ]
+  },
+  {
+    "split": "test",
+    "mae": 0.1811,
+    "rmse": 0.2804,
+    "auc": 0.5643,
+    "row_count": 1286317,
+    "by_bucket": [
+      {
+        "leitner_bucket": 0,
+        "row_count": 10246.0,
+        "mae": 0.43744940537066446
+      },
+      {
+        "leitner_bucket": 1,
+        "row_count": 115297.0,
+        "mae": 0.347787573004348
+      },
+      {
+        "leitner_bucket": 2,
+        "row_count": 214996.0,
+        "mae": 0.26334194413460543
+      },
+      {
+        "leitner_bucket": 3,
+        "row_count": 273575.0,
+        "mae": 0.18119347605882838
+      },
+      {
+        "leitner_bucket": 4,
+        "row_count": 672203.0,
+        "mae": 0.12229115090701095
+      }
+    ]
+  }
+]
