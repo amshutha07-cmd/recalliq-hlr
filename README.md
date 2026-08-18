@@ -40,6 +40,11 @@ DuckDB · Python / pandas · NumPy · scikit-learn (`roc_auc_score`) · SQL (via
 - DuckDB full-table scan/profile: 2.18s. Feature-table build: 6.58s.
 - `corr(h_estimate, p_recall)` = 0.1123 — a useful sanity check that the target
   variable and the half-life estimate used to fit it aren't trivially the same signal.
+- **5 engineered features** built in Module 2: `delta_days`, `running_accuracy`,
+  `h_estimate`, `log_delta`, `log_h_estimate`. Of these, `running_accuracy` (Leitner
+  bucket assignment) and `h_estimate` (HLR training target) feed the downstream
+  models directly; `log_delta`/`log_h_estimate` were built but not used by the final
+  baseline or model scripts.
 
 **Split (80/10/10, by user — not by row, to prevent leakage):**
 
