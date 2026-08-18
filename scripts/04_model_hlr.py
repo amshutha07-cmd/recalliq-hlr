@@ -137,18 +137,29 @@ def evaluate(w: np.ndarray, df: pd.DataFrame, split_name: str) -> dict:
     mae = np.mean(np.abs(err))
     rmse = np.sqrt(np.mean(err ** 2))
 
-    # AUC: same convention as the Leitner baseline — binary label from
-    # p_recall >= 0.5, ranking score is the model's predicted p_hat.
     y_true = (p >= 0.5).astype(int)
     if len(np.unique(y_true)) < 2:
         auc = float("nan")
     else:
         auc = roc_auc_score(y_true, p_hat)
 
-    # Per-Leitner-bucket MAE breakdown, mirroring Module 3's by_bucket table,
-    # so HLR's errors can be compared segment-by-segment against Leitner's.
+    leitner_bucket = assign_leitner_bucket(df)
+
+    # --- ADD THIS BLOCK: save row-level HLR predictions for the test split ---
+    if split_name == "test":
+        preds_df = pd.DataFrame({
+            "y_true_binary": y_true,     # for the AUC bootstrap
+            "y_true_p_recall": p,        # for the MAE bootstrap
+            "y_pred_hlr": p_hat,
+            "bucket": leitner_bucket,
+        })
+        preds_path = RESULTS_DIR / "hlr_test_predictions.csv"
+        preds_df.to_csv(preds_path, index=False)
+        print(f"  Saved row-level HLR test predictions → {preds_path}")
+    # ---------------------------------------------------------------------
+
     bucket_df = pd.DataFrame({
-        "leitner_bucket": assign_leitner_bucket(df),
+        "leitner_bucket": leitner_bucket,
         "abs_err": np.abs(err),
     })
     by_bucket = (

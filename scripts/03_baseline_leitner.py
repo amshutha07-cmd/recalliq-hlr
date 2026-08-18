@@ -21,15 +21,24 @@ def evaluate(df: pd.DataFrame, split_name: str) -> dict:
     mae = err.abs().mean()
     rmse = np.sqrt((err ** 2).mean())
 
-    # AUC: treat p_recall >= 0.5 as a binary "recalled correctly" label,
-    # use the predicted p_recall as the ranking score. Matches the paper's
-    # definition: probability a correctly-recalled instance ranks above an
-    # incorrectly-recalled one.
     y_true = (df["p_recall"] >= 0.5).astype(int)
     if y_true.nunique() < 2:
-        auc = float("nan")  # AUC undefined if a split has only one class
+        auc = float("nan")
     else:
         auc = roc_auc_score(y_true, df["p_recall_pred"])
+
+    # --- ADD THIS BLOCK: save row-level Leitner predictions for the test split ---
+    if split_name == "test":
+        preds_df = pd.DataFrame({
+            "y_true_binary": y_true,
+            "y_true_p_recall": df["p_recall"],
+            "y_pred_leitner": df["p_recall_pred"],
+            "bucket": df["leitner_bucket"],
+        })
+        preds_path = RESULTS_DIR / "leitner_test_predictions.csv"
+        preds_df.to_csv(preds_path, index=False)
+        print(f"  Saved row-level Leitner test predictions → {preds_path}")
+    # -----------------------------------------------------------------------
 
     by_bucket = (
         df.groupby("leitner_bucket")
