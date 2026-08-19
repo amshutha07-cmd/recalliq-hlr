@@ -5,4 +5,6 @@ __pycache__/
 .ipynb_checkpoints/
 
 data/*.duckdb
-module_notes
+module_notes/
+resume_numbers.md
+IMPLEMENTATION_PLAN.md
